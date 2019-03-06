@@ -53,9 +53,9 @@ def login():
 
 @app.route('/main')
 def main():
-    news = NewsModel(db.get_connection()).get_all(session['user_id'])
+    news = news_model.get_all(session['user_id'])
     return render_template('main.html', title='Главная', username=session['username'],
-                           news=news)
+                               news=news)
 
 
 @app.route('/add_news')

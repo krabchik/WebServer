@@ -47,6 +47,7 @@ class UsersModel:
 
     def exists(self, user_name, password_hash):
         cursor = self.connection.cursor()
+        print(password_hash)
         cursor.execute("SELECT * FROM users WHERE user_name = ? AND password_hash = ?",
                        (user_name, password_hash))
         row = cursor.fetchone()
