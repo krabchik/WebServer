@@ -47,7 +47,6 @@ class UsersModel:
 
     def exists(self, user_name, password_hash):
         cursor = self.connection.cursor()
-        print(password_hash)
         cursor.execute("SELECT * FROM users WHERE user_name = ? AND password_hash = ?",
                        (user_name, password_hash))
         row = cursor.fetchone()
@@ -84,8 +83,8 @@ class NewsModel:
     def get_all(self, user_id=None):
         cursor = self.connection.cursor()
         if user_id:
-            cursor.execute("SELECT * FROM news WHERE user_id = ?",
-                           (str(user_id)))
+            to_exec = f"SELECT * FROM news WHERE user_id = {str(user_id)}"
+            cursor.execute(to_exec)
         else:
             cursor.execute("SELECT * FROM news")
         rows = cursor.fetchall()
@@ -93,6 +92,6 @@ class NewsModel:
 
     def delete(self, news_id):
         cursor = self.connection.cursor()
-        cursor.execute('''DELETE FROM news WHERE id = ?''', (str(news_id)))
+        cursor.execute(f'''DELETE FROM news WHERE id = {str(news_id)}''')
         cursor.close()
         self.connection.commit()
