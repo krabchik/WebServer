@@ -57,6 +57,7 @@ class NewsModel:
     def __init__(self, connection):
         self.connection = connection
         cursor = self.connection.cursor()
+
         cursor.execute('''CREATE TABLE IF NOT EXISTS news 
                             (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                              title VARCHAR(100),
